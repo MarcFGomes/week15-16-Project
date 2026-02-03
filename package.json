@@ -14,7 +14,8 @@
   "main": "server.js",
   "scripts":{ 
   "dev": "nodemon server.js", 
-  "start": "node server.js" 
+  "start": "node server.js",
+  "seed": "node seeds/index.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

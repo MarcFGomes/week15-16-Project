@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Marc",
+    "email": "marc@inventory.com",
+    "password": "password123"
+  },
+  {
+    "name": "Vanessa",
+    "email": "vanessa@inventory.com",
+    "password": "password123"
+  },
+  {
+    "name": "Brian",
+    "email": "brian@inventory.com",
+    "password": "password123"
+  },
+  {
+    "name": "Amalia",
+    "email": "amalia@inventory.com",
+    "password": "password123"
+  },
+  {
+    "name": "Nina",
+    "email": "nina@inventory.com",
+    "password": "password123"
+  }
+]
