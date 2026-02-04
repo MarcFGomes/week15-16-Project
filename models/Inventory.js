@@ -24,7 +24,7 @@ Inventory.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: { model: "products", key: "id" },
-      onDelete: "CASCADE",
+      onDelete: "RESTRICT",
       onUpdate: "CASCADE",
     },
 
