@@ -1,0 +1,56 @@
+[
+  {
+    "barcode": "012345678901",
+    "name": "Wella Blondor Bleach 400g",
+    "category": "bleach",
+    "unit": "box",
+    "reorder_level": 3,
+    "target_level": 8,
+    "created_by": 1
+  },
+  {
+    "barcode": "012345678902",
+    "name": "Redken Shades EQ 60ml",
+    "category": "color",
+    "unit": "bottle",
+    "reorder_level": 5,
+    "target_level": 12,
+    "created_by": 1
+  },
+  {
+    "barcode": "012345678903",
+    "name": "Olaplex No.3 Treatment",
+    "category": "treatment",
+    "unit": "bottle",
+    "reorder_level": 4,
+    "target_level": 10,
+    "created_by": 1
+  },
+  {
+    "barcode": "012345678904",
+    "name": "Nitrile Gloves (100 pack)",
+    "category": "gloves",
+    "unit": "box",
+    "reorder_level": 2,
+    "target_level": 6,
+    "created_by": 4
+  },
+  {
+    "barcode": "012345678905",
+    "name": "Foil Sheets (500 pack)",
+    "category": "foil",
+    "unit": "box",
+    "reorder_level": 1,
+    "target_level": 4,
+    "created_by": 3
+  },
+  {
+    "barcode": "012345678906",
+    "name": "Developer 20 Volume 1L",
+    "category": "developer",
+    "unit": "bottle",
+    "reorder_level": 2,
+    "target_level": 5,
+    "created_by": 2
+  }
+]

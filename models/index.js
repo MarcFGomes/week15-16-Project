@@ -1,13 +1,22 @@
 const User = require("./User");
-const Project = require("./Project");
+const Salon = require("./Salon");
+const Product = require("./Product");
+const Inventory = require("./Inventory");
 
-User.hasMany(Project, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
+// Users → Products
+User.hasMany(Product, { foreignKey: "created_by" });
+Product.belongsTo(User, { foreignKey: "created_by" });
 
-Project.belongsTo(User, {
-  foreignKey: "user_id",
-});
+// Salons → Inventory
+Salon.hasMany(Inventory, { foreignKey: "salon_id" });
+Inventory.belongsTo(Salon, { foreignKey: "salon_id" });
 
-module.exports = { User, Project };
+// Products → Inventory
+Product.hasMany(Inventory, { foreignKey: "product_id" });
+Inventory.belongsTo(Product, { foreignKey: "product_id" });
+
+// Users → Inventory updates
+User.hasMany(Inventory, { foreignKey: "updated_by" });
+Inventory.belongsTo(User, { foreignKey: "updated_by" });
+
+module.exports = { User, Salon, Product, Inventory };
