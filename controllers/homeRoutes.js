@@ -2,6 +2,14 @@ const router = require("express").Router();
 const { User, Salon, Product, Inventory } = require("../models");
 //const withAuth = require("../utils/auth"); To do later
 
+
+router.get("/", (req, res) => {
+  res.render("menu", {
+    logged_in: req.session.logged_in,
+    user_name: req.session.user_name,
+  });
+});
+
 router.get("/inventory", async (req, res) => {
   try {
     const inventoryData = await Inventory.findAll({
@@ -124,6 +132,68 @@ router.get("/salons", async (req, res) => {
 
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+
+
+//External API
+router.get('products/barcodelookup', async (req, res) => {
+try {
+    const { barcode } = req.query;
+
+    if (!barcode) {
+      return res.status(400).json({
+        message: "barcode query parameter is required",
+        example: "/api/products/barcodelookup?barcode=012345678901",
+      });
+    }
+
+    const apiKey = process.env.API_KEY;
+    const baseUrl = process.env.API_URL;
+
+    if (!apiKey || !baseUrl) {
+      return res.status(500).json({
+        message: "Barcode API is not configured (missing env vars)",
+      });
+    }
+
+    const url = `${baseUrl}?barcode=${encodeURIComponent(
+      barcode
+    )}&key=${encodeURIComponent(apiKey)}`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      return res.status(502).json({
+        message: "Failed to fetch data from Barcode Lookup API",
+      });
+    }
+
+    const data = await response.json();
+
+    if (!data.products || data.products.length === 0) {
+      return res.status(404).json({
+        message: "No product found for this barcode",
+      });
+    }
+
+    // Return the first matched product (most APIs do this)
+    const product = data.products[0];
+
+    return res.json({
+      source: "Barcode Lookup API",
+      barcode,
+      product: {
+        name: product.product_name,
+        brand: product.brand,
+        category: product.category,
+        description: product.description,
+        images: product.images,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json(err);
   }
 });
 

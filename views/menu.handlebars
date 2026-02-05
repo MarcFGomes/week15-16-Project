@@ -1,0 +1,14 @@
+<h1>Salon Inventory</h1>
+
+{{#if logged_in}}
+  <p>Welcome, {{user_name}}!</p>
+  <button id="logout-btn">Logout</button>
+{{else}}
+  <a href="/login">Login</a>
+{{/if}}
+
+<ul class="menu">
+  <li><a href="/inventory">📦 Inventory</a></li>
+  <li><a href="/products">🧴 Products</a></li>
+  <li><a href="/barcodelookup">🔎 Barcode Lookup</a></li>
+</ul>
