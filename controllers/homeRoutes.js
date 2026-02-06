@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { User, Salon, Product, Inventory } = require("../models");
-//const withAuth = require("../utils/auth"); To do later
+const withAuth = require("../utils/auth");
 
 
-router.get("/", (req, res) => {
+router.get("/", withAuth, (req, res) => {
   res.render("menu", {
     logged_in: req.session.logged_in,
     user_name: req.session.user_name,
@@ -197,6 +197,12 @@ try {
   }
 });
 
+
+
+router.get("/login", (req, res) => {
+
+  res.render("login");
+});
 
 
 module.exports = router;
