@@ -1,0 +1,70 @@
+<section class="menu-page">
+
+  <h2 class="menu-welcome mb-4">Product Details</h2>
+
+  <a href="/products" class="back-link mb-3">
+    ← Back to products
+  </a>
+
+  <ul class="list-group menu-list">
+    <!-- Name + category -->
+    <li class="list-group-item">
+      <div class="menu-link">
+        <div class="product-name">{{product.name}}</div>
+        <div class="product-meta">{{product.category}}</div>
+      </div>
+    </li>
+
+    <!-- Barcode -->
+    <li class="list-group-item">
+      <div class="menu-link">
+        <strong>Barcode</strong>
+        <div class="product-meta">{{product.barcode}}</div>
+      </div>
+    </li>
+
+    <!-- Unit -->
+    <li class="list-group-item">
+      <div class="menu-link">
+        <strong>Unit</strong>
+        <div class="product-meta">{{product.unit}}</div>
+      </div>
+    </li>
+
+    <!-- Stock levels -->
+    <li class="list-group-item">
+      <div class="menu-link">
+        <strong>Reorder level</strong>
+        <div class="product-meta">{{product.reorder_level}}</div>
+      </div>
+    </li>
+
+    <li class="list-group-item">
+      <div class="menu-link">
+        <strong>Target level</strong>
+        <div class="product-meta">{{product.target_level}}</div>
+      </div>
+    </li>
+
+    <!-- Created by -->
+      <li class="list-group-item">
+        <div class="menu-link">
+          <strong>Created by</strong>
+          <div class="product-meta">
+            {{product.user.name}} ({{product.user.email}})
+          </div>
+        </div>
+      </li>
+
+
+    <!-- Created at -->
+      <li class="list-group-item">
+        <div class="menu-link">
+          <strong>Created on</strong>
+          <div class="product-meta">
+            {{product.createdAt}}
+          </div>
+        </div>
+      </li>
+  </ul>
+</section>

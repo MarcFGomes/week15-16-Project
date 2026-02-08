@@ -43,21 +43,25 @@ router.post("/", withAuth, async (req, res) => {
 //DELETE /api/products/:id 
 router.delete("/:id", withAuth, async (req, res) => {
   try {
-    const deleted = await Product.destroy({
-      where: {
-        id: req.params.id,
-        created_by: req.session.user_id,
-      },
-    });
+    const deleted = await Product.destroy({ where: { id: req.params.id } });
 
     if (!deleted) {
-      return res.status(404).json({ message: "No product found for this user." });
+      return res.status(404).json({ message: "Product not found." });
     }
 
-    res.status(200).json({ message: "Product deleted." });
-    
+    return res.status(200).json({ message: "Product deleted." });
   } catch (err) {
-    res.status(500).json(err);
+    const code = err?.original?.code || err?.parent?.code;
+
+    // FK constraint violation (product is referenced by inventory)
+    if (code === "23503" || code === "23001") {
+      return res.status(409).json({
+        message:
+          "You can’t delete this product because it’s used in Inventory. Remove it from Inventory first.",
+      });
+    }
+
+    return res.status(500).json({ message: "Server error." });
   }
 });
 

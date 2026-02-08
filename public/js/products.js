@@ -1,21 +1,29 @@
-document.addEventListener("click", async (e) => {
-  const btn = e.target.closest(".js-delete-product");
+// Delete project
+async function delButtonHandler(event) {
+  const btn = event.target.closest(".js-delete-product");
+
+
+
   if (!btn) return;
 
   const id = btn.dataset.id;
-  if (!id) return;
 
-  const ok = confirm("Delete this product?");
-  if (!ok) return;
+  console.log("Clicked delete. id =", id, "btn =", btn);
 
-  const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
+  const response = await fetch(`/api/products/${id}`, {
+    method: "DELETE",
+  });
 
-  if (res.ok) {
-    // remove the LI from the page immediately
-    const li = document.querySelector(`[data-product-id="${id}"]`);
-    if (li) li.remove();
+  if (response.ok) {
+    document.location.reload(); // refresh profile list
   } else {
-    const data = await res.json().catch(() => ({}));
-    alert(data.message || "Failed to delete product.");
+    const data = await response.json().catch(() => ({}));
+    console.log("Delete error:", data);
+    alert(data.message || "Failed to delete project");
   }
-});
+}
+
+// Listen for delete clicks (event delegation)
+document
+  .querySelector(".list-group")
+  ?.addEventListener("click", delButtonHandler);

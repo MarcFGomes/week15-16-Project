@@ -105,13 +105,15 @@ router.get("/products/:id", withAuth, async (req, res) => {
 
     const product = productData.get({ plain: true });
 
-    /*res.render("project", {
-      project,
+    product.createdAt = new Date(product.createdAt).toLocaleDateString();
+
+    res.render("product-info", {
+      product,
       logged_in: req.session.logged_in,
       user_name: req.session.user_name,
-    }); */
+    });
 
-    res.json(product);
+    //res.json(product);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -137,46 +139,51 @@ router.get("/salons", withAuth, async (req, res) => {
 //External API
 router.get("/products/:id/details", withAuth, async (req, res) => {
   try {
-    const { barcode } = req.query;
-
-    if (!barcode) {
-      return res.status(400).json({
-        message: "barcode query parameter is required",
-        example: "/api/products/barcodelookup?barcode=012345678901",
-      });
+    // 1) Get product from DB
+    const productData = await Product.findByPk(req.params.id);
+    if (!productData) {
+      return res.status(404).render("404", { logged_in: req.session.logged_in });
     }
+    const product = productData.get({ plain: true });
 
-    const apiKey = process.env.API_KEY;
+    // 2) Prepare barcode lookup
+    const apiKeyRaw = process.env.API_KEY || "";
+    const apiKey = apiKeyRaw.replace(/^key=/, ""); // in case your env has "key="
     const baseUrl = process.env.API_URL;
 
-    if (!apiKey || !baseUrl) {
-      return res.status(500).json({
-        message: "Barcode API is not configured (missing env vars)",
-      });
+    let barcodeInfo = null;
+    let barcodeMessage = null;
+
+    if (!product.barcode) {
+      barcodeMessage = "This product has no barcode saved.";
+    } else if (!apiKey || !baseUrl) {
+      barcodeMessage = "Barcode API is not configured.";
+    } else {
+      const u = new URL(baseUrl);
+      u.searchParams.set("barcode", product.barcode);
+      u.searchParams.set("key", apiKey);
+
+      const response = await fetch(u.toString());
+
+      if (!response.ok) {
+        barcodeMessage = `Barcode information is temporarily unavailable (${response.status}).`;
+      } else {
+        const data = await response.json();
+        barcodeInfo = data?.products?.[0] || null;
+        if (!barcodeInfo) {
+          barcodeMessage = "No barcode information found for this product.";
+        }
+      }
     }
 
-    const url = `${baseUrl}?barcode=${encodeURIComponent(barcode)}&key=${encodeURIComponent(apiKey)}`;
-    console.log(url);
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      return res.status(502).json({ message: "Failed to fetch data from Barcode Lookup API" });
-    }
-
-    const data = await response.json();
-
-    if (!data.products || data.products.length === 0) {
-      return res.status(404).json({ message: "No product found for this barcode" });
-    }
-
-    const barcodeInfo = data.products[0];
-    //return res.json(barcodeInfo);
+    // 3) Render page (always)
     return res.render("product-details", {
+      product,
       barcodeInfo,
+      barcodeMessage,
       logged_in: req.session.logged_in,
       user_name: req.session.user_name,
     });
-
   } catch (err) {
     return res.status(500).json(err);
   }
