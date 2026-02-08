@@ -10,7 +10,7 @@ router.get("/", withAuth, (req, res) => {
   });
 });
 
-router.get("/inventory", async (req, res) => {
+router.get("/inventory", withAuth, async (req, res) => {
   try {
     const inventoryData = await Inventory.findAll({
         include: [
@@ -36,7 +36,7 @@ router.get("/inventory", async (req, res) => {
   }
 });
 
-router.get("/inventory/:id", async (req, res) => {
+router.get("/inventory/:id", withAuth, async (req, res) => {
   try {
     const inventoryData = await Inventory.findByPk(req.params.id, {
         include: [
@@ -66,7 +66,7 @@ router.get("/inventory/:id", async (req, res) => {
   }
 });
 
-router.get("/products", async (req, res) => {
+router.get("/products", withAuth, async (req, res) => {
   try {
     const productData = await Product.findAll({
       include: [{ model: User, attributes: ["id", "name", "email"] }],
@@ -88,7 +88,7 @@ router.get("/products", async (req, res) => {
   }
 });
 
-router.get("/products/:id", async (req, res) => {
+router.get("/products/:id", withAuth, async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id, {
       include: [{ model: User, attributes: ["id", "name", "email"] }],
@@ -114,7 +114,7 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 
-router.get("/salons", async (req, res) => {
+router.get("/salons", withAuth, async (req, res) => {
   try {
     const salonData = await Salon.findAll({
       order: [["id", "ASC"]],
@@ -138,7 +138,7 @@ router.get("/salons", async (req, res) => {
 
 
 //External API
-router.get('products/barcodelookup', async (req, res) => {
+router.get('products/barcodelookup', withAuth, async (req, res) => {
 try {
     const { barcode } = req.query;
 

@@ -1,6 +1,6 @@
 const logout = async () => {
   const response = await fetch("/api/users/logout", { method: "POST" });
-  if (response.ok) document.location.replace("/");
+  if (response.ok) document.location.replace("/login");
 };
 
 const btn = document.querySelector("#logout");

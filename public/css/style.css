@@ -1,0 +1,75 @@
+/* Header */
+.app-header {
+  background-color: #000;
+}
+
+/* Title: responsive sizing */
+.app-title {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.1;
+}
+
+/* Logout button */
+.logout-btn {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: transparent;
+  border-radius: 999px;
+  padding: 8px 18px;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap; /* prevents "Log\nout" on tiny screens */
+}
+
+.logout-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+
+
+
+.menu-page {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.menu-welcome {
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 700;
+}
+
+/* Lists */
+.menu-list {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.menu-item,
+.salon-item {
+  padding: 0;
+}
+
+.menu-link {
+  display: block;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.menu-link:hover {
+  background-color: #f8f9fa;
+}
+
+/* Salon info */
+.salon-name {
+  font-weight: 700;
+}
+
+.salon-meta {
+  font-size: 0.9rem;
+  color: #6c757d;
+}

@@ -40,7 +40,7 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-//DELETE /api/products/:id (owner only)
+//DELETE /api/products/:id 
 router.delete("/:id", withAuth, async (req, res) => {
   try {
     const deleted = await Product.destroy({

@@ -1,14 +1,33 @@
-<h1>Salon Inventory</h1>
+<section class="menu-page">
+  <h2 class="menu-welcome mb-4">Welcome, {{user_name}}!</h2>
 
-{{#if logged_in}}
-  <p>Welcome, {{user_name}}!</p>
-  <button id="logout-btn">Logout</button>
-{{else}}
-  <a href="/login">Login</a>
-{{/if}}
+  <!-- Main Menu List -->
+  <ul class="list-group menu-list mb-4">
+    <li class="list-group-item menu-item">
+      <a href="/inventory" class="menu-link">
+        <span>📦 Inventory</span>
+      </a>
+    </li>
 
-<ul class="menu">
-  <li><a href="/inventory">📦 Inventory</a></li>
-  <li><a href="/products">🧴 Products</a></li>
-  <li><a href="/barcodelookup">🔎 Barcode Lookup</a></li>
-</ul>
+    <li class="list-group-item menu-item">
+      <a href="/products" class="menu-link">
+        <span>🧴 Products</span>
+      </a>
+    </li>
+
+    <li class="list-group-item menu-item">
+      <a href="/products/new" class="menu-link">
+        <span>➕ Add Product</span>
+      </a>
+    </li>
+
+    <li class="list-group-item menu-item">
+      <a href="/salons" class="menu-link">
+        <span>✂️ Salons</span>
+      </a>
+    </li>
+
+
+  </ul>
+
+</section>
