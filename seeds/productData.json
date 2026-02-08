@@ -1,7 +1,7 @@
 [
   {
-    "barcode": "012345678901",
-    "name": "Wella Blondor Bleach 400g",
+    "barcode": "4064666578804",
+    "name": "Wella Bondor Plex 9",
     "category": "bleach",
     "unit": "box",
     "reorder_level": 3,
@@ -9,8 +9,8 @@
     "created_by": 1
   },
   {
-    "barcode": "012345678902",
-    "name": "Redken Shades EQ 60ml",
+    "barcode": "4064666221687",
+    "name": "Wella Welloxon Perfect 9% 30 vol",
     "category": "color",
     "unit": "bottle",
     "reorder_level": 5,
@@ -18,8 +18,8 @@
     "created_by": 1
   },
   {
-    "barcode": "012345678903",
-    "name": "Olaplex No.3 Treatment",
+    "barcode": "4021609587101",
+    "name": "Goldwell Nuwave - Prep Cream 1",
     "category": "treatment",
     "unit": "bottle",
     "reorder_level": 4,
@@ -27,7 +27,7 @@
     "created_by": 1
   },
   {
-    "barcode": "012345678904",
+    "barcode": "850037465002",
     "name": "Nitrile Gloves (100 pack)",
     "category": "gloves",
     "unit": "box",
@@ -36,7 +36,7 @@
     "created_by": 4
   },
   {
-    "barcode": "012345678905",
+    "barcode": "672047131001",
     "name": "Foil Sheets (500 pack)",
     "category": "foil",
     "unit": "box",
@@ -45,7 +45,7 @@
     "created_by": 3
   },
   {
-    "barcode": "012345678906",
+    "barcode": "3474636979011",
     "name": "Developer 20 Volume 1L",
     "category": "developer",
     "unit": "bottle",

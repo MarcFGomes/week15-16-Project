@@ -55,7 +55,7 @@ router.delete("/:id", withAuth, async (req, res) => {
     }
 
     res.status(200).json({ message: "Product deleted." });
-    //res.status(501).json({ message: "Not implemented yet" });
+    
   } catch (err) {
     res.status(500).json(err);
   }

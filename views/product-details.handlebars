@@ -1,0 +1,58 @@
+<section class="menu-page">
+
+  <h2 class="menu-welcome mb-4">Product Details</h2>
+
+  <a href="/products" class="back-link mb-3">
+    ← Back to products
+  </a>
+
+  <!-- Product info -->
+  {{#if barcodeInfo}}
+    <div class="card">
+      <div class="card-body d-flex flex-column flex-md-row gap-3">
+
+        {{#if barcodeInfo.images}}
+          <div
+            class="flex-shrink-0 align-self-start"
+            style="width:160px; height:160px;"
+          >
+            <img
+              src="{{barcodeInfo.images.[0]}}"
+              alt="{{barcodeInfo.title}}"
+              class="w-100 h-100"
+              style="object-fit: contain;"
+            />
+          </div>
+        {{/if}}
+
+        <div class="flex-grow-1">
+          {{#if barcodeInfo.title}}
+            <p class="mb-1"><strong>Name:</strong> {{barcodeInfo.title}}</p>
+          {{/if}}
+
+          {{#if barcodeInfo.brand}}
+            <p class="mb-1"><strong>Brand:</strong> {{barcodeInfo.brand}}</p>
+          {{/if}}
+
+          {{#if barcodeInfo.manufacturer}}
+            <p class="mb-1"><strong>Manufacturer:</strong>
+              {{barcodeInfo.manufacturer}}</p>
+          {{/if}}
+
+          {{#if barcodeInfo.category}}
+            <p class="mb-1"><strong>Category:</strong>
+              {{barcodeInfo.category}}</p>
+          {{/if}}
+
+          {{#if barcodeInfo.description}}
+            <p class="mt-2">{{barcodeInfo.description}}</p>
+          {{/if}}
+        </div>
+
+      </div>
+    </div>
+  {{else}}
+    <p class="text-muted">No barcode information found.</p>
+  {{/if}}
+
+</section>

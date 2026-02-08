@@ -1,0 +1,28 @@
+<li class="list-group-item product-item d-flex justify-content-between align-items-center"
+    data-product-id="{{id}}">
+  <div class="menu-link p-0">
+    <div class="product-name">{{name}}</div>
+
+    {{#if brand}}
+      <div class="product-meta">{{brand}}</div>
+    {{/if}}
+
+    {{#if barcode}}
+      <div class="product-meta">Barcode: {{barcode}}</div>
+    {{/if}}
+  </div>
+
+  <div class="d-flex gap-2">
+    <a class="btn btn-sm btn-outline-dark" href="/products/{{id}}">
+      Details
+    </a>
+
+    <a class="btn btn-sm btn-outline-dark" href="/products/{{id}}/details?barcode={{barcode}}">
+      Detailed Info
+    </a>
+
+    <button type="button" class="btn btn-sm btn-outline-danger js-delete-product" data-id="{{id}}">
+      Delete
+    </button>
+  </div>
+</li>

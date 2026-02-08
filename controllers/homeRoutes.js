@@ -2,7 +2,6 @@ const router = require("express").Router();
 const { User, Salon, Product, Inventory } = require("../models");
 const withAuth = require("../utils/auth");
 
-
 router.get("/", withAuth, (req, res) => {
   res.render("menu", {
     logged_in: req.session.logged_in,
@@ -13,12 +12,18 @@ router.get("/", withAuth, (req, res) => {
 router.get("/inventory", withAuth, async (req, res) => {
   try {
     const inventoryData = await Inventory.findAll({
-        include: [
-        { model: Product, attributes: ["id", "barcode", "name", "category", "unit"] },
+      include: [
+        {
+          model: Product,
+          attributes: ["id", "barcode", "name", "category", "unit"],
+        },
         { model: Salon, attributes: ["id", "name"] },
-        { model: User, attributes: ["id", "name"] } // updated_by
-        ],
-      order: [["salon_id", "ASC"], ["product_id", "ASC"]],
+        { model: User, attributes: ["id", "name"] }, // updated_by
+      ],
+      order: [
+        ["salon_id", "ASC"],
+        ["product_id", "ASC"],
+      ],
     });
     const inventory = inventoryData.map((p) => p.get({ plain: true }));
 
@@ -30,7 +35,6 @@ router.get("/inventory", withAuth, async (req, res) => {
     }); */
 
     res.json(inventory);
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -39,11 +43,14 @@ router.get("/inventory", withAuth, async (req, res) => {
 router.get("/inventory/:id", withAuth, async (req, res) => {
   try {
     const inventoryData = await Inventory.findByPk(req.params.id, {
-        include: [
-        { model: Product, attributes: ["id", "barcode", "name", "category", "unit"] },
+      include: [
+        {
+          model: Product,
+          attributes: ["id", "barcode", "name", "category", "unit"],
+        },
         { model: Salon, attributes: ["id", "name"] },
-        { model: User, attributes: ["id", "name"] } // updated_by
-        ],
+        { model: User, attributes: ["id", "name"] }, // updated_by
+      ],
     });
 
     if (!inventoryData)
@@ -60,7 +67,6 @@ router.get("/inventory/:id", withAuth, async (req, res) => {
     }); */
 
     res.json(inventory);
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -74,15 +80,13 @@ router.get("/products", withAuth, async (req, res) => {
     });
     const product = productData.map((p) => p.get({ plain: true }));
 
-    /*res.render("home", {
-      projects,
+    res.render("product", {
+      product,
       logged_in: req.session.logged_in,
       user_name: req.session.user_name,
-      is_profile: false,
-    }); */
+    });
 
-    res.json(product);
-
+    //res.json(product);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -108,7 +112,6 @@ router.get("/products/:id", withAuth, async (req, res) => {
     }); */
 
     res.json(product);
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -119,27 +122,21 @@ router.get("/salons", withAuth, async (req, res) => {
     const salonData = await Salon.findAll({
       order: [["id", "ASC"]],
     });
-    const salon = salonData.map((p) => p.get({ plain: true }));
+    const salons = salonData.map((p) => p.get({ plain: true }));
 
-    /*res.render("home", {
-      projects,
+    res.render("salons", {
+      salons,
       logged_in: req.session.logged_in,
       user_name: req.session.user_name,
-      is_profile: false,
-    }); */
-
-    res.json(salon);
-
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
-
 //External API
-router.get('products/barcodelookup', withAuth, async (req, res) => {
-try {
+router.get("/products/:id/details", withAuth, async (req, res) => {
+  try {
     const { barcode } = req.query;
 
     if (!barcode) {
@@ -158,51 +155,35 @@ try {
       });
     }
 
-    const url = `${baseUrl}?barcode=${encodeURIComponent(
-      barcode
-    )}&key=${encodeURIComponent(apiKey)}`;
-
+    const url = `${baseUrl}?barcode=${encodeURIComponent(barcode)}&key=${encodeURIComponent(apiKey)}`;
+    console.log(url);
     const response = await fetch(url);
 
     if (!response.ok) {
-      return res.status(502).json({
-        message: "Failed to fetch data from Barcode Lookup API",
-      });
+      return res.status(502).json({ message: "Failed to fetch data from Barcode Lookup API" });
     }
 
     const data = await response.json();
 
     if (!data.products || data.products.length === 0) {
-      return res.status(404).json({
-        message: "No product found for this barcode",
-      });
+      return res.status(404).json({ message: "No product found for this barcode" });
     }
 
-    // Return the first matched product (most APIs do this)
-    const product = data.products[0];
-
-    return res.json({
-      source: "Barcode Lookup API",
-      barcode,
-      product: {
-        name: product.product_name,
-        brand: product.brand,
-        category: product.category,
-        description: product.description,
-        images: product.images,
-      },
+    const barcodeInfo = data.products[0];
+    //return res.json(barcodeInfo);
+    return res.render("product-details", {
+      barcodeInfo,
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name,
     });
+
   } catch (err) {
     return res.status(500).json(err);
   }
 });
 
-
-
 router.get("/login", (req, res) => {
-
   res.render("login");
 });
-
 
 module.exports = router;

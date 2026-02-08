@@ -1,0 +1,17 @@
+<section class="menu-page">
+  <h2 class="menu-welcome mb-4">Salons</h2>
+
+  <a href="/" class="back-link mb-3">
+    ← Back to menu
+  </a>
+
+  {{#if salons.length}}
+    <ul class="list-group menu-list">
+      {{#each salons}}
+        {{> salon-card}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="text-muted">No salons found.</p>
+  {{/if}}
+</section>

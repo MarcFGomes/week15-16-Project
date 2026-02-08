@@ -1,0 +1,22 @@
+<section class="menu-page">
+  <h2 class="menu-welcome mb-4">Products</h2>
+
+  <a href="/" class="back-link mb-3">
+    ← Back to menu
+  </a>
+
+
+
+  {{#if product.length}}
+    <ul class="list-group menu-list">
+      {{#each product}}
+        {{> product-card}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="text-muted">No products found.</p>
+  {{/if}}
+</section>
+
+
+<script src="/js/products.js"></script>
