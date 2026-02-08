@@ -1,0 +1,32 @@
+<li class="list-group-item">
+  <div class="menu-link">
+    <div class="d-flex justify-content-between align-items-start gap-3">
+      <div>
+        <div class="product-name">{{product.name}}</div>
+
+        <div class="product-meta">
+          Salon: {{salon.name}} · Category: {{product.category}} · Unit: {{product.unit}}
+        </div>
+
+        <div class="product-meta">
+          Barcode: {{product.barcode}}
+        </div>
+
+        {{#if user}}
+          <div class="product-meta">
+            Updated by: {{user.name}}
+          </div>
+        {{/if}}
+      </div>
+
+      <div class="text-end">
+        <div class="qty-pill">Qty: {{quantity}}</div>
+
+        {{#if quantity}}
+        {{else}}
+          <div class="text-danger small mt-1">Out of stock</div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</li>

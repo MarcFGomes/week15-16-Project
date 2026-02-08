@@ -1,0 +1,19 @@
+<section class="menu-page">
+
+
+  <h2 class="menu-welcome mb-4">Inventory</h2>
+
+  <a href="/" class="back-link mb-3">
+    ← Back to menu
+  </a>
+
+  {{#if inventory.length}}
+    <ul class="list-group menu-list">
+      {{#each inventory}}
+        {{> inventory-card}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="text-muted">No inventory records found.</p>
+  {{/if}}
+</section>

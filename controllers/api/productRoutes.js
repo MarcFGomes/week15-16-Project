@@ -38,7 +38,7 @@ router.post("/", withAuth, async (req, res) => {
       target_level: target_level ?? 3,
        created_by: req.session.user_id, 
     });
-    // ? if the project is successfully created, the new response will be returned as json
+    
     res.status(200).json(newProduct);
     //res.status(501).json({ message: "Not implemented yet" });
   } catch (err) {

@@ -27,14 +27,11 @@ router.get("/inventory", withAuth, async (req, res) => {
     });
     const inventory = inventoryData.map((p) => p.get({ plain: true }));
 
-    /*res.render("home", {
-      projects,
-      logged_in: req.session.logged_in,
-      user_name: req.session.user_name,
-      is_profile: false,
-    }); */
+    res.render("inventory", {
+      inventory,
+    }); 
 
-    res.json(inventory);
+    //res.json(inventory);
   } catch (err) {
     res.status(500).json(err);
   }
