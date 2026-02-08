@@ -13,11 +13,17 @@ router.post("/", withAuth, async (req, res) => {
       unit,
       reorder_level,
       target_level,
-      created_by,
     } = req.body;
 
     // basic guard (optional but good)
-    if (!barcode || !name || !category || created_by == null) {
+    if (
+      !barcode ||
+      !name ||
+      !category ||
+      !unit ||
+      reorder_level === undefined ||
+      target_level === undefined
+    ) {
       return res.status(400).json({ message: "Missing required fields." });
     }
     
@@ -30,7 +36,7 @@ router.post("/", withAuth, async (req, res) => {
       unit: unit || "unit",
       reorder_level: reorder_level ?? 1,
       target_level: target_level ?? 3,
-      created_by,
+       created_by: req.session.user_id, 
     });
     // ? if the project is successfully created, the new response will be returned as json
     res.status(200).json(newProduct);

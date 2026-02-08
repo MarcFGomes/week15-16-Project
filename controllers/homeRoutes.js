@@ -92,6 +92,34 @@ router.get("/products", withAuth, async (req, res) => {
   }
 });
 
+
+
+
+router.get("/products/new", withAuth, (req, res) => {
+  res.render("product-new", {
+    logged_in: req.session.logged_in,
+    user_name: req.session.user_name,
+  });
+});
+
+router.get("/salons", withAuth, async (req, res) => {
+  try {
+    const salonData = await Salon.findAll({
+      order: [["id", "ASC"]],
+    });
+    const salons = salonData.map((p) => p.get({ plain: true }));
+
+    res.render("salons", {
+      salons,
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 router.get("/products/:id", withAuth, async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id, {
@@ -114,23 +142,6 @@ router.get("/products/:id", withAuth, async (req, res) => {
     });
 
     //res.json(product);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get("/salons", withAuth, async (req, res) => {
-  try {
-    const salonData = await Salon.findAll({
-      order: [["id", "ASC"]],
-    });
-    const salons = salonData.map((p) => p.get({ plain: true }));
-
-    res.render("salons", {
-      salons,
-      logged_in: req.session.logged_in,
-      user_name: req.session.user_name,
-    });
   } catch (err) {
     res.status(500).json(err);
   }
