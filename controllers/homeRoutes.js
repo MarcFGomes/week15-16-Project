@@ -37,6 +37,25 @@ router.get("/inventory", withAuth, async (req, res) => {
   }
 });
 
+router.get("/inventory/new", withAuth, async (req, res) => {
+  try {
+    const salonsData = await Salon.findAll({ order: [["name", "ASC"]] });
+    const productsData = await Product.findAll({ order: [["name", "ASC"]] });
+
+    const salons = salonsData.map((s) => s.get({ plain: true }));
+    const products = productsData.map((p) => p.get({ plain: true }));
+
+    res.render("inventory-new", {
+      salons,
+      products,
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/inventory/:id", withAuth, async (req, res) => {
   try {
     const inventoryData = await Inventory.findByPk(req.params.id, {
