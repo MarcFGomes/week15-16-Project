@@ -85,3 +85,15 @@
   color: #6c757d;
 }
 
+
+.app-title-link {
+  text-decoration: none;
+}
+
+.app-title-link .app-title {
+  color: #fff;
+}
+
+.app-title-link:hover .app-title {
+  text-decoration: underline;
+}

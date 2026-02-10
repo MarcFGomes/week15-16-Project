@@ -15,7 +15,7 @@ router.post("/", withAuth, async (req, res) => {
       target_level,
     } = req.body;
 
-    // basic guard (optional but good)
+    // basic guard
     if (
       !barcode ||
       !name ||

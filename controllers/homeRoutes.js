@@ -29,6 +29,8 @@ router.get("/inventory", withAuth, async (req, res) => {
 
     res.render("inventory", {
       inventory,
+      logged_in: req.session.logged_in,
+      user_name: req.session.user_name,
     }); 
 
     //res.json(inventory);
