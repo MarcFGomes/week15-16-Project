@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" data-inventory-id="{{id}}">
   <div class="menu-link">
     <div class="d-flex justify-content-between align-items-start gap-3">
       <div>
@@ -19,13 +19,22 @@
         {{/if}}
       </div>
 
-      <div class="text-end">
+      <div class="text-end d-flex flex-column align-items-end gap-2">
         <div class="qty-pill">Qty: {{quantity}}</div>
 
         {{#if quantity}}
         {{else}}
-          <div class="text-danger small mt-1">Out of stock</div>
+          <div class="text-danger small">Out of stock</div>
         {{/if}}
+
+        <!-- DELETE BUTTON -->
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-danger js-delete-inventory"
+          data-id="{{id}}"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>

@@ -55,4 +55,21 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
+//DELETE /api/inventory/:id 
+router.delete("/:id", withAuth, async (req, res) => {
+  try {
+    const deleted = await Inventory.destroy({ where: { id: req.params.id } });
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Inventory not found." });
+    }
+
+    return res.status(200).json({ message: "Inventory deleted." });
+  } catch (err) {
+    const code = err?.original?.code || err?.parent?.code;
+
+    return res.status(500).json({ message: "Server error." });
+  }
+});
+
 module.exports = router;
