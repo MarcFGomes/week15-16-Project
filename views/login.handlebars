@@ -1,5 +1,6 @@
 <div class="row g-4">
-  <div class="col-12 col-lg-6">
+  <!-- LOGIN -->
+  <div class="col-12">
     <div class="card">
       <div class="card-body">
         <h2 class="h5">Log In</h2>
@@ -18,5 +19,33 @@
       </div>
     </div>
   </div>
+
+  <!-- SIGN UP -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="h5">Create Account</h2>
+        <form class="signup-form">
+          <div class="mb-3">
+            <label class="form-label" for="name-signup">Name</label>
+            <input class="form-control" type="text" id="name-signup" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email-signup">Email</label>
+            <input class="form-control" type="email" id="email-signup" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password-signup">
+              Password (min 8 chars)
+            </label>
+            <input class="form-control" type="password" id="password-signup" />
+          </div>
+          <button class="btn btn-outline-dark" type="submit">Sign up</button>
+        </form>
+        <p id="signup-msg" class="mt-2 text-danger small"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="/js/login.js"></script>
