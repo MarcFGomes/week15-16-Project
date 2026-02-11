@@ -6,6 +6,9 @@ const salonData = require("./salonData.json");
 const productData = require("./productData.json");
 const inventoryData = require("./inventoryData.json");
 
+console.log("DATABASE_URL?", !!process.env.DB_URL);
+console.log("DB_PASSWORD type:", typeof process.env.DB_PASSWORD);
+
 const seedDatabase = async () => {
   try {
     // DROP + CREATE tables in correct order

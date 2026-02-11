@@ -3,6 +3,8 @@
 A full-stack web application that allows salon owners and staff to manage products and inventory across multiple salon locations.  
 The system supports authentication, inventory tracking, and barcode-based product lookup via an external API.
 
+Internal tool to manage inventory and order approvals across teams — replaces spreadsheets and manual processes.
+
 
 **Screenshots:**
 ![Login](public/screenshots/Screenshot-1.png)
@@ -135,7 +137,8 @@ npm run seed
 
 
 ## 🌍 Deployed Application
-👉 **Live Demo:** (Add your Render URL here)
+👉 **Live Demo:**
+https://salon-inventory.onrender.com/login
 
 👉 **GitHub Repository:**  
 https://github.com/MarcFGomes/week15-16-Project

@@ -10,7 +10,7 @@ const sequelize = require("./config/connection");
 const routes = require("./controllers");
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 
 const hbs = exphbs.create();
@@ -42,7 +42,7 @@ app.use(routes);
 
 
 sequelize
-  .sync()
+  .sync({ force: false })
   .then(() => {
     console.log('✅ Database connected & models synced');
     console.log(`🌐 Server listening on http://localhost:${PORT}`);
